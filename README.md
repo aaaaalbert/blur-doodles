@@ -29,5 +29,21 @@ undersample regular motion patterns.)
 Accuracy: Round to specific precision. **How effective is this?**
 
 
+
+
 ### WiFi
 
+When connected to an access point, it shows its name (SSID),
+MAC address (BSSID), frequency, capabilities, RSSI, link speed;
+also the device's MAC and IP addresses.
+
+When scanning, it shows every nearby access point's SSID, BSSID,
+frequency, capabilities.
+
+Either way, it's PII as WiFi names and MAC addresses can be mapped
+to physical locations easily.
+
+Rate: doesn't help.
+
+Accuracy: Hash and salt (keeping the salt constant across vessels
+of one experiment).
