@@ -50,5 +50,7 @@ Exposes
 Rate limiting: doesn't help much, see other location-type sensors.
 
 Accuracy reduction:
-Hash and salt (keeping the salt constant across vessels
-of one experiment).
+* Suppress/randomize (B)SSIDs. Still exhibits some info about the spectrum,
+  worth investigating for fingerprintability etc.
+* Hash and salt (B)SSIDs, keepi the salt constant across vessels
+  of one experiment.
