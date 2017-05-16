@@ -13,7 +13,7 @@ type of level to the other?
 
 
 ### Accelerometer
-Measures acceleration (m/s^2) of device in three spacial dimensions, at up to 200 Hz
+Measures acceleration (m/s^2) of device in three spatial dimensions, at up to 200 Hz
 (as per Android 7) and around 12 bits of nominal accuracy.
 
 Exposes
@@ -33,6 +33,26 @@ Accuracy reduction:
 
 
 
+### Gyroscope
+
+Measures angular velocity (rad/s) of the device around three spatial
+dimensions, at up to 200 Hz (cf. GyroPhone) and **unknown resolution**.
+
+For privacy relevance and mitigations see Accelerometer.
+
+
+
+### Magnetometer
+
+Measures the ambient magnetic field (uT) of the device along three spatial
+dimensions, at an **unknown rate** and **unknown resolution**.
+
+Exposes
+* Orientation of the device in comparison to Earth's magentic field.
+
+For other privacy relevance and mitigations see Accelerometer.
+
+
 
 ### WiFi
 
@@ -47,10 +67,45 @@ Exposes
 * Physical device location, as WiFi names and MAC addresses can be mapped.
 * See any location-type sensor for further implications.
 
-Rate limiting: doesn't help much, see other location-type sensors.
+Rate limiting: See other location-type sensors.
 
 Accuracy reduction:
 * Suppress/randomize (B)SSIDs. Still exhibits some info about the spectrum,
   worth investigating for fingerprintability etc.
 * Hash and salt (B)SSIDs, keepi the salt constant across vessels
   of one experiment.
+
+
+
+### Bluetooth
+
+#### `get_bluetooth_info`
+
+Returns a locally-administered MAC address
+("02:..."), device name, interface state (on/off, turning on/off),
+and scan mode (none, connectable, connectable and discoverable) of
+the device.
+
+Exposes
+* The device name which might be unique and/or reference the user by name.
+
+Rate limiting: Likely doesn't help because the Bluetooth name of the
+device won't change very often; the scan mode might though.
+
+Accuracy reduction: See WiFi interface.
+
+
+
+#### `get_bluetooth_scan_info`
+
+Scans for Bluetooth devices in the vicinity.
+
+Exposes for every scanned device the
+* MAC address
+* "Device type", i.e. a [broad classification of Bluetooth interface capabilities](https://developer.android.com/reference/android/bluetooth/BluetoothDevice.html#DEVICE_TYPE_CLASSIC)
+* "Bond state", i.e. whether this device has been paired (or is currently
+  pairing) with the owner's device and can communicate encrypted.
+
+Note: Bluetooth device names are currently [**not** exposed](https://github.com/aaaaalbert/sensibility-testbed/commit/68f0b5b6e708903bbfb728a61d7da082fc526898#diff-33ae59376f054824ee6480e4b9dcc0e9R661)
+
+Rate limiting, accuracy reduction: See WiFi interface.
