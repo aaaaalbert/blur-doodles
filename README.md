@@ -54,6 +54,24 @@ For other privacy relevance and mitigations see Accelerometer.
 
 
 
+### GPS and Fused Location Sensor
+
+Exposes the device's
+* location on earth (degrees latitude and longitude,
+  height over sea level, bearing, speed) from GPS, or
+* an actual street address (street, city, state, country) via
+  a database lookup over the Internet, possibly factoring in WiFi
+  and the cellular interface.
+
+Rate limiting:
+* Undersampling might be possible
+
+Accuracy reduction:
+* See https://github.com/SensibilityTestbed/sensorlib for
+  techniques like blur-to-ZIP-code, blur-to-nearest-city.
+
+
+
 ### WiFi
 
 When connected to an access point, it shows its name (SSID),
